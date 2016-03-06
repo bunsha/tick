@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @localhost" uuid="b46c9e34-0499-4017-9495-205ec47d8a59">
+    <database-info product="MySQL" version="5.6.22-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="tick"/>
+    <table name="comments" schema="" catalog="tick" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ticket_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="subject" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_comments_tickets" columns="ticket_id" ref-table="tickets" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_comments_users" columns="user_id" ref-table="users" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_comments_tickets" unique="false" columns="ticket_id"/>
+      <index name="FK_comments_users" unique="false" columns="user_id"/>
+    </table>
+    <table name="tickets" schema="" catalog="tick" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_comments_tickets" table="comments" schema="" catalog="tick" columns="ticket_id"/>
+      <exported-key name="FK_tickets_types_tickets" table="tickets_types" schema="" catalog="tick" columns="ticket_id"/>
+      <exported-key name="FK__tickets" table="users_tickets" schema="" catalog="tick" columns="ticket_id"/>
+    </table>
+    <table name="tickets_types" schema="" catalog="tick" type="TABLE">
+      <column name="ticket_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <foreign-key name="FK_tickets_types_tickets" columns="ticket_id" ref-table="tickets" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_tickets_types_types" columns="type_id" ref-table="types" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_tickets_types_tickets" unique="false" columns="ticket_id"/>
+      <index name="FK_tickets_types_types" unique="false" columns="type_id"/>
+    </table>
+    <table name="types" schema="" catalog="tick" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_tickets_types_types" table="tickets_types" schema="" catalog="tick" columns="type_id"/>
+      <exported-key name="FK_users_types_types" table="users_types" schema="" catalog="tick" columns="type_id"/>
+    </table>
+    <table name="users" schema="" catalog="tick" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="225" scale="0" nullable="false" jdbcType="12"/>
+      <column name="parent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="team" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="leader" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="remember_token" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_users_users1" columns="parent_id" ref-table="users" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
+      <exported-key name="FK_comments_users" table="comments" schema="" catalog="tick" columns="user_id"/>
+      <exported-key name="fk_users_users1" table="users" schema="" catalog="tick" columns="parent_id"/>
+      <exported-key name="FK__users" table="users_tickets" schema="" catalog="tick" columns="user_id"/>
+      <exported-key name="FK_users_types_users" table="users_types" schema="" catalog="tick" columns="user_id"/>
+      <index name="email_UNIQUE" unique="true" columns="email"/>
+      <index name="fk_users_users1_idx" unique="false" columns="parent_id"/>
+    </table>
+    <table name="users_tickets" schema="" catalog="tick" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ticket_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <foreign-key name="FK__tickets" columns="ticket_id" ref-table="tickets" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK__users" columns="user_id" ref-table="users" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK__tickets" unique="false" columns="ticket_id"/>
+      <index name="FK__users" unique="false" columns="user_id"/>
+    </table>
+    <table name="users_types" schema="" catalog="tick" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <foreign-key name="FK_users_types_types" columns="type_id" ref-table="types" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_users_types_users" columns="user_id" ref-table="users" ref-schema="" ref-catalog="tick" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_users_types_types" unique="false" columns="type_id"/>
+      <index name="FK_users_types_users" unique="false" columns="user_id"/>
+    </table>
+  </data-source>
+</component>
